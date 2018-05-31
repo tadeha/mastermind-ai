@@ -10,7 +10,9 @@ Lecturer Name: Mr. Jhoobin Daghooghi
 
 SPRING 2018
 
-### Description
+## Description
+
+This program used [Hill Climbing Technique](https://www.geeksforgeeks.org/introduction-hill-climbing-artificial-intelligence/) to solve a game of [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game)).
 
 
 ## Playing a Game
