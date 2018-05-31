@@ -17,7 +17,7 @@ This program used [Hill Climbing Technique](https://www.geeksforgeeks.org/introd
 
 ## Playing a Game
 
-To play a game clone this repository, open the .java file with and IDE (Eclipse, NetBeans and etc.) and then follow the instructions shown in the console.
+To play a game clone this repository, open the .java file with an IDE (Eclipse, NetBeans and etc.) and then follow the instructions shown in the console.
 
 ## License
 
