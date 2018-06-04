@@ -83,7 +83,7 @@ public class Mastermind extends file {
 
     }
 
-    // this function returns a 4 random numbers array
+    // this function returns a 4 random numbers array (no repeating numbers)
     public int[] random() {
         Random rand = new Random();
 
@@ -127,7 +127,7 @@ public class Mastermind extends file {
             }
         }
 
-        write_file(path, "black is:" + black + "  " + "white is :" + white);
+        write_file(path, "number of black pegs/peg are/is:" + black + "  " + "number of white pegs/peg are/is :" + white);
         
         pin[0] = black;
         pin[1] = white;
@@ -136,20 +136,26 @@ public class Mastermind extends file {
 
     }
 
+    // this function calculates and returns number of errors for each guess
     public int error(int[] guess1, int[] guess2, int[] guess3, int[] guess4, int[] newguess, int[] pin1, int[] pin2,
             int[] pin3, int[] pin4) {
 
         int error = 0;
         int errorarray[] = new int[4];
         Mastermind m = new Mastermind();
+        
         int pin5[] = m.compare(newguess, guess1);
         errorarray[0] = m.sumerror(pin1, pin5);
+        
         int pin6[] = m.compare(newguess, guess2);
         errorarray[1] = m.sumerror(pin2, pin6);
+        
         int pin7[] = m.compare(newguess, guess3);
         errorarray[2] = m.sumerror(pin3, pin7);
+        
         int pin8[] = m.compare(newguess, guess4);
         errorarray[3] = m.sumerror(pin4, pin8);
+        
         error = errorarray[0] + errorarray[1] + errorarray[2] + errorarray[3];
         System.out.println("error :" + error);
         write_file(path, "error :" + error);
@@ -159,8 +165,8 @@ public class Mastermind extends file {
         return error;
     }
 
+    //this function calculates the sum of two error
     public int sumerror(int[] right, int[] guess) {
-
         int a = right[0] - guess[0];
 
         int b = right[1] - guess[1];
@@ -213,7 +219,7 @@ public class Mastermind extends file {
         return node_array;
     }
 
-    // this function searchs for the minimum error node and returns a boolean
+    // this function searches for the minimum error node and returns a boolean
     public boolean searchMinError(int c, Node node) {
         Node cur = node;
         if (cur.c1 == c || cur.c2 == c || cur.c3 == c || cur.c4 == c) {
@@ -222,6 +228,7 @@ public class Mastermind extends file {
         return true;
     }
 
+    // this function searches for the minumim error node and returns a node
     public Node min_error_node() {
         Node min_error = first;
         int minerror = first.error;
@@ -237,6 +244,7 @@ public class Mastermind extends file {
         return min_error;
     }
 
+    // this function returns the number of minimum errors in our list
     public Node[] numbers_of_minerror(Node minerror) {
         Node cur = first;
         int j = 10;
