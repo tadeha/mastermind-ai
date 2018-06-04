@@ -7,7 +7,7 @@ public class Mastermind extends file {
     static int[][] minerror;
     static int[][] save;
     public Node first;
-    String path = "/Users/tadeh/Documents/mastermind-tadeh/path1.txt";
+    String path = "/Users/tadeh/Documents/mastermind-modifications/mastermind-ai/path1.txt";
 
     // constructor of the main class
     public Mastermind() {
@@ -30,7 +30,7 @@ public class Mastermind extends file {
             answer[i] = scanner.nextInt();
         }
 
-        String path = "/Users/tadeh/Documents/mastermind-tadeh/path1.txt";
+        String path = "/Users/tadeh/Documents/mastermind-modifications/mastermind-ai/path1.txt";
 
         clear_file(path);
 
