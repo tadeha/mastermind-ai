@@ -73,6 +73,8 @@ public class Mastermind extends file {
         int guess10[] = random();
         m.child(guess10, answer);
 
+        System.out.println("✗ Answer doesn't found! \n");
+        write_file(path, "✗ Answer doesn't found!");
     }
 
     // this function returns a 4 random numbers array (no repeating numbers)
@@ -172,7 +174,7 @@ public class Mastermind extends file {
         return (a + b);
     }
 
-    // returns a child node
+    // inserts a child node to linked list
     public Node insertNode(int parent[], int error) {
         int c1, c2, c3, c4, number;
         c1 = parent[0];
@@ -269,7 +271,7 @@ public class Mastermind extends file {
             // check for repeating numbers
             if (m.searchMinError(i, p) == true) {
                 parent[j] = i;
-                //System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
+                System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 write_file(path, parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 error = m.error(save[0], save[1], save[2], save[3], parent, save[4], save[5], save[6], save[7]);
                 m.insertNode(parent, error);
@@ -292,7 +294,7 @@ public class Mastermind extends file {
         for (int i = 1; i < 10; i++) {
             if (m.searchMinError(i, p) == true) {
                 parent[j1] = i;
-                //System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
+                System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 write_file(path, parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 error = m.error(save[0], save[1], save[2], save[3], parent, save[4], save[5], save[6], save[7]);
                 m.insertNode(parent, error);
@@ -386,8 +388,8 @@ public class Mastermind extends file {
             B[3] = A[0].c4;
             pin = compare(answer, B);
             if (pin[0] == 4) {
-                System.out.print("answer is " + B[0] + "," + B[1] + "," + B[2] + "," + B[3]);
-                write_file(path, "answer is " + B[0] + "," + B[1] + "," + B[2] + "," + B[3]);
+                System.out.println("✓Answer Found: " + B[0] + "," + B[1] + "," + B[2] + "," + B[3] + "\n");
+                write_file(path, "✓Answer Found: " + B[0] + "," + B[1] + "," + B[2] + "," + B[3]);
                 System.exit(0);
             }
 
@@ -399,8 +401,8 @@ public class Mastermind extends file {
                 B[3] = A[j].c4;
                 pin = compare(answer, B);
                 if (pin[0] == 4) {
-                    System.out.print("answer is " + B[0] + "," + B[1] + "," + B[2] + "," + B[3]);
-                    write_file(path, "answer is " + B[0] + "," + B[1] + "," + B[2] + "," + B[3]);
+                    System.out.println("✓Answer Found: " + B[0] + "," + B[1] + "," + B[2] + "," + B[3] + "\n");
+                    write_file(path, "✓Answer Found:" + B[0] + "," + B[1] + "," + B[2] + "," + B[3]);
                     System.exit(0);
 
                 }

@@ -15,16 +15,12 @@ public class file {
         }
     }
 
-    public static void clear_file(String path) {
-        File f = new File(path);
-        if (f.exists()) {
-            f.delete();
-            try {
-                f.createNewFile();
-            } catch (IOException e) {
-                System.out.println("error");
-            }
-        }
+    public static void clear_file(String path) throws FileNotFoundException, IOException {
+       File file = new File(path);
+        FileOutputStream fooStream = new FileOutputStream(file, false);
+
+        fooStream.write("".getBytes());
+        fooStream.close();
     }
 
     public static void create_file(String path) {
