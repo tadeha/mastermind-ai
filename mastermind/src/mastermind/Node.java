@@ -2,13 +2,16 @@ package mastermind;
 
 public class Node {
 
-    //fields
+    // value of each field (_,_,_,_) -> (c1,c2,c3,c4)
     public int c1;
     public int c2;
     public int c3;
     public int c4;
+    // a 4 digit number containing above digits (c1c2c3c4)
     public int number;
+    // value of error
     public int error;
+    // doubly linked list prev/next
     public Node prelink;  //Reference to prelink
     public Node link;      //Reference to next
 

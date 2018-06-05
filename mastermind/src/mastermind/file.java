@@ -22,7 +22,7 @@ public class file {
             try {
                 f.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("error");
             }
         }
     }
@@ -34,7 +34,6 @@ public class file {
             s.close();
         } catch (FileNotFoundException e) {
             System.out.println("error");
-
         }
     }
 
@@ -61,7 +60,6 @@ public class file {
             fw.close();
         } catch (IOException v) {
             System.out.println("error");
-
         }
     }
 
@@ -74,7 +72,6 @@ public class file {
             fw.close();
         } catch (IOException v) {
             System.out.println("error");
-
         }
     }
 
@@ -88,7 +85,6 @@ public class file {
             sc.close();
         } catch (FileNotFoundException er) {
             System.out.println("cannot open the file\n");
-
         }
     }
 }

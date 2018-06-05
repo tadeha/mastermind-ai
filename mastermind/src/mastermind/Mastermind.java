@@ -4,19 +4,13 @@ import java.util.*;
 
 public class Mastermind extends file {
 
-    static int[][] minerror;
     static int[][] save;
     public Node first;
-    String path = "/Users/tadeh/Documents/mastermind-modifications/mastermind-ai/path1.txt";
+    static String path = "/Users/tadeh/Documents/mastermind-modifications/mastermind-ai/path1.txt";
 
     // constructor of the main class
     public Mastermind() {
         first = null;
-    }
-
-    // check if link is empty or not
-    int isEmpty() {
-        return ((first == null) ? 1 : 0);
     }
 
     public static void main(String[] args) {
@@ -30,61 +24,59 @@ public class Mastermind extends file {
             answer[i] = scanner.nextInt();
         }
 
-        String path = "/Users/tadeh/Documents/mastermind-modifications/mastermind-ai/path1.txt";
-
         clear_file(path);
 
         //System.out.println(answer[0] + "," + answer[1] + "," + answer[2] + "," + answer[3]);
         write_file(path, "Decided Answer:");
         write_file(path, answer[0] + "," + answer[1] + "," + answer[2] + "," + answer[3]);
         write_file(path, "------------------------------");
-        
-        int guess1[] = m.random();
+
+        int guess1[] = random();
         //System.out.print(guess1[0] + "," + guess1[1] + "," + guess1[2] + "," + guess1[3] + ":  ");
         write_file(path, guess1[0] + "," + guess1[1] + "," + guess1[2] + "," + guess1[3] + ":  ");
-        int pin1[] = m.compare(answer, guess1);
+        int pin1[] = compare(answer, guess1);
 
-        int guess2[] = m.random();
+        int guess2[] = random();
         //System.out.print(guess2[0] + "," + guess2[1] + "," + guess2[2] + "," + guess2[3] + ":  ");
         write_file(path, guess2[0] + "," + guess2[1] + "," + guess2[2] + "," + guess2[3] + ":  ");
-        int pin2[] = m.compare(answer, guess2);
+        int pin2[] = compare(answer, guess2);
 
-        int guess3[] = m.random();
+        int guess3[] = random();
         //System.out.print(guess3[0] + "," + guess3[1] + "," + guess3[2] + "," + guess3[3] + ":  ");
         write_file(path, guess3[0] + "," + guess3[1] + "," + guess3[2] + "," + guess3[3] + ":  ");
-        int pin3[] = m.compare(answer, guess3);
-        
-        int guess4[] = m.random();
+        int pin3[] = compare(answer, guess3);
+
+        int guess4[] = random();
         //System.out.print(guess4[0] + "," + guess4[1] + "," + guess4[2] + "," + guess4[3] + ":  ");
         write_file(path, guess4[0] + "," + guess4[1] + "," + guess4[2] + "," + guess4[3] + ":  ");
-        int pin4[] = m.compare(answer, guess4);
-        
-        int guess5[] = m.random();
+        int pin4[] = compare(answer, guess4);
+
+        int guess5[] = random();
         //System.out.println(guess5[0] + "," + guess5[1] + "," + guess5[2] + "," + guess5[3] + ":  ");
         write_file(path, guess5[0] + "," + guess5[1] + "," + guess5[2] + "," + guess5[3] + ":  ");
-        
-        m.saveGuesses(guess1, guess2, guess3, guess4, pin1, pin2, pin3, pin4);
+
+        saveGuesses(guess1, guess2, guess3, guess4, pin1, pin2, pin3, pin4);
         m.child(guess5, answer);
-        
-        int guess6[] = m.random();
+
+        int guess6[] = random();
         m.child(guess6, answer);
-        
-        int guess7[] = m.random();
+
+        int guess7[] = random();
         m.child(guess7, answer);
-        
-        int guess8[] = m.random();
+
+        int guess8[] = random();
         m.child(guess8, answer);
-        
-        int guess9[] = m.random();
+
+        int guess9[] = random();
         m.child(guess9, answer);
-        
-        int guess10[] = m.random();
+
+        int guess10[] = random();
         m.child(guess10, answer);
 
     }
 
     // this function returns a 4 random numbers array (no repeating numbers)
-    public int[] random() {
+    private static int[] random() {
         Random rand = new Random();
 
         int a = rand.nextInt(9) + 1;
@@ -111,11 +103,11 @@ public class Mastermind extends file {
     }
 
     // this function compares the guess with our actual answer and returns the pins array
-    public int[] compare(int[] answer, int[] guess) {
+    private static int[] compare(int[] answer, int[] guess) {
         int black = 0;
         int white = 0;
         int pin[] = new int[2];
-        
+
         for (int i = 0; i < answer.length; i++) {
             if (answer[i] == guess[i]) {
                 black++;
@@ -128,10 +120,10 @@ public class Mastermind extends file {
         }
 
         write_file(path, "number of black pegs/peg are/is:" + black + "  " + "number of white pegs/peg are/is :" + white);
-        
+
         pin[0] = black;
         pin[1] = white;
-        
+
         return pin;
 
     }
@@ -142,20 +134,19 @@ public class Mastermind extends file {
 
         int error = 0;
         int errorarray[] = new int[4];
-        Mastermind m = new Mastermind();
-        
-        int pin5[] = m.compare(newguess, guess1);
-        errorarray[0] = m.sumerror(pin1, pin5);
-        
-        int pin6[] = m.compare(newguess, guess2);
-        errorarray[1] = m.sumerror(pin2, pin6);
-        
-        int pin7[] = m.compare(newguess, guess3);
-        errorarray[2] = m.sumerror(pin3, pin7);
-        
-        int pin8[] = m.compare(newguess, guess4);
-        errorarray[3] = m.sumerror(pin4, pin8);
-        
+
+        int pin5[] = compare(newguess, guess1);
+        errorarray[0] = sumerror(pin1, pin5);
+
+        int pin6[] = compare(newguess, guess2);
+        errorarray[1] = sumerror(pin2, pin6);
+
+        int pin7[] = compare(newguess, guess3);
+        errorarray[2] = sumerror(pin3, pin7);
+
+        int pin8[] = compare(newguess, guess4);
+        errorarray[3] = sumerror(pin4, pin8);
+
         error = errorarray[0] + errorarray[1] + errorarray[2] + errorarray[3];
         System.out.println("error :" + error);
         write_file(path, "error :" + error);
@@ -166,7 +157,7 @@ public class Mastermind extends file {
     }
 
     //this function calculates the sum of two error
-    public int sumerror(int[] right, int[] guess) {
+    private static int sumerror(int[] right, int[] guess) {
         int a = right[0] - guess[0];
 
         int b = right[1] - guess[1];
@@ -179,20 +170,26 @@ public class Mastermind extends file {
             }
         }
         return (a + b);
-
     }
 
-    public Node insertb(int parent[], int error) {
+    // returns a child node
+    public Node insertNode(int parent[], int error) {
         int c1, c2, c3, c4, number;
         c1 = parent[0];
         c2 = parent[1];
         c3 = parent[2];
         c4 = parent[3];
+
+        // creating a 4 digit number
         number = (c1 * 1000) + (c2 * 100) + (c3 * 10) + (c4);
+        // creating a node from given info
         Node p = new Node(c1, c2, c3, c4, number, error);
+
         if (first == null) {
+            // parent always will be at first
             first = p;
         } else {
+            // connect children to the parent
             Node cur = first;
             while (cur.link != null) {
                 cur = cur.link;
@@ -201,22 +198,8 @@ public class Mastermind extends file {
                 cur.link = p;
                 p.prelink = cur;
             }
-
         }
         return p;
-    }
-
-    public int[] insertb(Node node) {
-        int[] node_array = new int[4];
-        node_array[0] = node.c1;
-        node_array[1] = node.c2;
-        node_array[2] = node.c3;
-        node_array[3] = node.c4;
-        System.out.println("------------------------------\nchild minerror:\n" + node_array[0] + "," + node_array[1]
-                + "," + node_array[2] + "," + node_array[3] + ":  ");
-        write_file(path, "------------------------------\nchild minerror:\n" + node_array[0] + "," + node_array[1] + ","
-                + node_array[2] + "," + node_array[3] + ":  ");
-        return node_array;
     }
 
     // this function searches for the minimum error node and returns a boolean
@@ -262,54 +245,67 @@ public class Mastermind extends file {
         return A;
     }
 
-    // a function to create children from a parent (it returns a child of a parent)
-    public Node[] child(int parent[], int[] answer) {
+    // a function to create children from a parent (it returns a child of a parent) (the answer does not used for camparing)
+    private Node[] child(int parent[], int[] answer) {
         Mastermind m = new Mastermind();
         Random rand = new Random();
+
+        // this array contains the children nodes which has the same error number
         Node[] A = null;
+
         Node minerror = first;
+
+        // calculate the error number
         int error = m.error(save[0], save[1], save[2], save[3], parent, save[4], save[5], save[6], save[7]);
 
-        Node p = m.insertb(parent, error);
+        // create parent/children nodes
+        Node p = m.insertNode(parent, error);
 
         minerror = m.min_error_node();
-        int j = 2;// rand.nextInt(4);
+        int j = rand.nextInt(4);
 
+        // creating the children -> field 1
         for (int i = 1; i < 10; i++) {
+            // check for repeating numbers
             if (m.searchMinError(i, p) == true) {
                 parent[j] = i;
-                System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
+                //System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 write_file(path, parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 error = m.error(save[0], save[1], save[2], save[3], parent, save[4], save[5], save[6], save[7]);
-                m.insertb(parent, error);
+                m.insertNode(parent, error);
+                // find the most minimum error number
                 minerror = m.min_error_node();
-
             }
         }
+
         parent[0] = p.c1;
         parent[1] = p.c2;
         parent[2] = p.c3;
         parent[3] = p.c4;
+
         int j1 = rand.nextInt(4);
+
         while (j == j1) {
             j1 = rand.nextInt(4);
         }
+
         for (int i = 1; i < 10; i++) {
             if (m.searchMinError(i, p) == true) {
                 parent[j1] = i;
-                System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
+                //System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 write_file(path, parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 error = m.error(save[0], save[1], save[2], save[3], parent, save[4], save[5], save[6], save[7]);
-                m.insertb(parent, error);
+                m.insertNode(parent, error);
                 minerror = m.min_error_node();
 
             }
         }
-        
+
         parent[0] = p.c1;
         parent[1] = p.c2;
         parent[2] = p.c3;
         parent[3] = p.c4;
+
         int j2 = 0;
         while (j == j2 || j2 == j1) {
             j2 = rand.nextInt(4);
@@ -321,7 +317,7 @@ public class Mastermind extends file {
                 System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 write_file(path, parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 error = m.error(save[0], save[1], save[2], save[3], parent, save[4], save[5], save[6], save[7]);
-                m.insertb(parent, error);
+                m.insertNode(parent, error);
                 minerror = m.min_error_node();
 
             }
@@ -330,6 +326,7 @@ public class Mastermind extends file {
         parent[1] = p.c2;
         parent[2] = p.c3;
         parent[3] = p.c4;
+
         int j3 = 0;
         while (j == j3 || j3 == j1 || j3 == j2) {
             j3 = rand.nextInt(4);
@@ -341,18 +338,24 @@ public class Mastermind extends file {
                 System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 write_file(path, parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 error = m.error(save[0], save[1], save[2], save[3], parent, save[4], save[5], save[6], save[7]);
-                m.insertb(parent, error);
+                m.insertNode(parent, error);
                 minerror = m.min_error_node();
 
             }
         }
+        // print the minerror node number
         System.out.println("minerror:" + minerror.error);
         write_file(path, "minerror:" + minerror.error);
-        if (minerror.number == p.number) {
 
+        // avoiding loop in creating children and stack overflow
+        if (minerror.number == p.number) {
+            // finish creating children
             return A;
         }
+
+        // fill the array with nodes which has the same error number
         A = m.numbers_of_minerror(minerror);
+
         if (A[0].error != 0) {
             m.S(A, answer);
         }
@@ -365,14 +368,14 @@ public class Mastermind extends file {
 
     }
 
-    public void D(Node[] A, int[] answer) {
+    private static void D(Node[] A, int[] answer) {
         int B[] = new int[4];
         Mastermind m = new Mastermind();
-        int pin[] = new int[2];
+        int pin[];
         int n = 0;
 
-        for (int i = 0; i < A.length; i++) {
-            if (A[i] != null) {
+        for (Node A1 : A) {
+            if (A1 != null) {
                 n++;
             }
         }
@@ -381,7 +384,7 @@ public class Mastermind extends file {
             B[1] = A[0].c2;
             B[2] = A[0].c3;
             B[3] = A[0].c4;
-            pin = m.compare(answer, B);
+            pin = compare(answer, B);
             if (pin[0] == 4) {
                 System.out.print("answer is " + B[0] + "," + B[1] + "," + B[2] + "," + B[3]);
                 write_file(path, "answer is " + B[0] + "," + B[1] + "," + B[2] + "," + B[3]);
@@ -394,7 +397,7 @@ public class Mastermind extends file {
                 B[1] = A[j].c2;
                 B[2] = A[j].c3;
                 B[3] = A[j].c4;
-                pin = m.compare(answer, B);
+                pin = compare(answer, B);
                 if (pin[0] == 4) {
                     System.out.print("answer is " + B[0] + "," + B[1] + "," + B[2] + "," + B[3]);
                     write_file(path, "answer is " + B[0] + "," + B[1] + "," + B[2] + "," + B[3]);
@@ -412,8 +415,8 @@ public class Mastermind extends file {
 
         Mastermind m = new Mastermind();
         int n = 0;
-        for (int i = 0; i < A.length; i++) {
-            if (A[i] != null) {
+        for (Node A1 : A) {
+            if (A1 != null) {
                 n++;
             }
         }
@@ -436,7 +439,7 @@ public class Mastermind extends file {
     }
 
     // this function save guesses with their pin values in an array called "save"
-    public void saveGuesses(int[] guess1, int[] guess2, int[] guess3, int[] guess4, int[] pin1, int[] pin2, int[] pin3,
+    private static void saveGuesses(int[] guess1, int[] guess2, int[] guess3, int[] guess4, int[] pin1, int[] pin2, int[] pin3,
             int[] pin4) {
 
         save = new int[8][];
