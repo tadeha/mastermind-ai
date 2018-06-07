@@ -17,12 +17,12 @@ public class Mastermind extends file {
 
     public static void main(String[] args) throws IOException {
         Mastermind m = new Mastermind();
-
-        //int[] answer = new int[4];
         
        int answer[] = random();
         
         /*
+        int[] answer = new int[4];
+       
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter 4 numbers to be guessed:");
         for (int i = 0; i < answer.length; i++) {
@@ -224,16 +224,13 @@ public class Mastermind extends file {
     }
 
     // this function searches for the minimum error node and returns a boolean
-    public boolean searchMinError(int c, Node node) {
+    public boolean checkRepeatingNumbers(int c, Node node) {
         Node cur = node;
-        if (cur.c1 == c || cur.c2 == c || cur.c3 == c || cur.c4 == c) {
-            return false;
-        }
-        return true;
+        return !(cur.c1 == c || cur.c2 == c || cur.c3 == c || cur.c4 == c);
     }
 
     // this function searches for the minumim error node and returns a node
-    public Node min_error_node() {
+    public Node minErrorNode() {
         Node min_error = first;
         int minerror = first.error;
         Node cur = first;
@@ -282,20 +279,20 @@ public class Mastermind extends file {
         // create parent/children nodes
         Node p = m.insertNode(parent, error);
 
-        minerror = m.min_error_node();
+        minerror = m.minErrorNode();
         int j = rand.nextInt(4);
 
         // creating the children -> field 1
         for (int i = 1; i < 10; i++) {
             // check for repeating numbers
-            if (m.searchMinError(i, p) == true) {
+            if (m.checkRepeatingNumbers(i, p) == true) {
                 parent[j] = i;
                 System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 write_file(path, parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 error = m.error(save[0], save[1], save[2], save[3], parent, save[4], save[5], save[6], save[7]);
                 m.insertNode(parent, error);
                 // find the most minimum error number
-                minerror = m.min_error_node();
+                minerror = m.minErrorNode();
             }
         }
 
@@ -311,13 +308,13 @@ public class Mastermind extends file {
         }
 
         for (int i = 1; i < 10; i++) {
-            if (m.searchMinError(i, p) == true) {
+            if (m.checkRepeatingNumbers(i, p) == true) {
                 parent[j1] = i;
                 System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 write_file(path, parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 error = m.error(save[0], save[1], save[2], save[3], parent, save[4], save[5], save[6], save[7]);
                 m.insertNode(parent, error);
-                minerror = m.min_error_node();
+                minerror = m.minErrorNode();
 
             }
         }
@@ -333,13 +330,13 @@ public class Mastermind extends file {
         }
 
         for (int i = 1; i < 10; i++) {
-            if (m.searchMinError(i, p) == true) {
+            if (m.checkRepeatingNumbers(i, p) == true) {
                 parent[j2] = i;
                 System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 write_file(path, parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 error = m.error(save[0], save[1], save[2], save[3], parent, save[4], save[5], save[6], save[7]);
                 m.insertNode(parent, error);
-                minerror = m.min_error_node();
+                minerror = m.minErrorNode();
 
             }
         }
@@ -354,13 +351,13 @@ public class Mastermind extends file {
         }
 
         for (int i = 1; i < 10; i++) {
-            if (m.searchMinError(i, p) == true) {
+            if (m.checkRepeatingNumbers(i, p) == true) {
                 parent[j3] = i;
                 System.out.println(parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 write_file(path, parent[0] + "," + parent[1] + "," + parent[2] + "," + parent[3] + ":  ");
                 error = m.error(save[0], save[1], save[2], save[3], parent, save[4], save[5], save[6], save[7]);
                 m.insertNode(parent, error);
-                minerror = m.min_error_node();
+                minerror = m.minErrorNode();
 
             }
         }
@@ -435,7 +432,7 @@ public class Mastermind extends file {
 
     }
 
-    // check the error number of array "A" and then if it isn't equal to 0 call the child function with the most less min error node
+    // check the error number of array "A" and then if it isn't equal to 0 call the child function with the most less min error node (Most Less Errors)
     public void createChildrenFromMLE(Node[] A, int[] answer) {
         int B[] = new int[4];
 
