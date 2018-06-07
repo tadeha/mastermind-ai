@@ -8,7 +8,7 @@ public class Mastermind extends file {
     static int[][] save;
     public Node first;
     static String path = "/Users/tadeh/Documents/mastermind-modifications/mastermind-ai/path1.txt";
-    static int steps =4;
+    static int steps = 4;
     
     // constructor of the main class
     public Mastermind() {
@@ -29,8 +29,6 @@ public class Mastermind extends file {
             answer[i] = scanner.nextInt();
         }
         */
-        
-        
         
         clear_file(path);
 
@@ -379,10 +377,11 @@ public class Mastermind extends file {
         // fill the array with nodes which has the same error number
         A = m.numbers_of_minerror(minerror);
 
+        // check the error number of array "A" and then if it isn't equal to 0 call the child function with the most less min error node
         if (A[0].error != 0) {
-            m.S(A, answer);
+            m.createChildrenFromMLE(A, answer);
         }
-
+        // check the error number of array "A" and then if it isn't equal to 0 call the child function with the most less min error node
         if (A[0].error == 0) {
             D(A, answer);
         }
@@ -391,9 +390,10 @@ public class Mastermind extends file {
 
     }
 
+    // this function checks if the number of black pins are 4 (after comparing it with the answer) prints the result as answer
+    // if the nodes with the min error are more than 1 run a for loop for it
     private static void D(Node[] A, int[] answer) {
         int B[] = new int[4];
-        Mastermind m = new Mastermind();
         int pin[];
         int n = 0;
 
@@ -435,7 +435,8 @@ public class Mastermind extends file {
 
     }
 
-    public void S(Node[] A, int[] answer) {
+    // check the error number of array "A" and then if it isn't equal to 0 call the child function with the most less min error node
+    public void createChildrenFromMLE(Node[] A, int[] answer) {
         int B[] = new int[4];
 
         Mastermind m = new Mastermind();
@@ -445,6 +446,9 @@ public class Mastermind extends file {
                 n++;
             }
         }
+        
+        //below if-else checks if the nodes with the min error are just one are more than one
+        // if it is one, fill the array "B" but if it isn't, run a for loop and create children from each of them
         if (n == 1) {
             B[0] = A[0].c1;
             B[1] = A[0].c2;
@@ -460,7 +464,6 @@ public class Mastermind extends file {
                 m.child(B, answer);
             }
         }
-
     }
 
     // this function save guesses with their pin values in an array called "save"
