@@ -1,5 +1,6 @@
 package mastermind;
 
+import java.io.*;
 import java.util.*;
 
 public class Mastermind extends file {
@@ -7,23 +8,30 @@ public class Mastermind extends file {
     static int[][] save;
     public Node first;
     static String path = "/Users/tadeh/Documents/mastermind-modifications/mastermind-ai/path1.txt";
-
+    static int steps =4;
+    
     // constructor of the main class
     public Mastermind() {
         first = null;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Mastermind m = new Mastermind();
 
-        int[] answer = new int[4];
-
+        //int[] answer = new int[4];
+        
+       int answer[] = random();
+        
+        /*
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter 4 numbers to be guessed:");
         for (int i = 0; i < answer.length; i++) {
             answer[i] = scanner.nextInt();
         }
-
+        */
+        
+        
+        
         clear_file(path);
 
         //System.out.println(answer[0] + "," + answer[1] + "," + answer[2] + "," + answer[3]);
@@ -57,22 +65,35 @@ public class Mastermind extends file {
 
         saveGuesses(guess1, guess2, guess3, guess4, pin1, pin2, pin3, pin4);
         m.child(guess5, answer);
-
+        
+        steps++;
+        
         int guess6[] = random();
         m.child(guess6, answer);
 
+        steps++;
+        
         int guess7[] = random();
         m.child(guess7, answer);
 
+        steps++;
+        
         int guess8[] = random();
         m.child(guess8, answer);
 
+        steps++;
+        
         int guess9[] = random();
         m.child(guess9, answer);
 
+        steps++;
+        
         int guess10[] = random();
         m.child(guess10, answer);
 
+        steps++;
+        
+        System.out.println("Number of steps is: " + steps);
         System.out.println("✗ Answer doesn't found! \n");
         write_file(path, "✗ Answer doesn't found!");
     }
@@ -121,7 +142,7 @@ public class Mastermind extends file {
             }
         }
 
-        write_file(path, "number of black pegs/peg are/is:" + black + "  " + "number of white pegs/peg are/is :" + white);
+        write_file(path, "⚉: " + black + "  " + "⚇: " + white);
 
         pin[0] = black;
         pin[1] = white;
@@ -388,6 +409,7 @@ public class Mastermind extends file {
             B[3] = A[0].c4;
             pin = compare(answer, B);
             if (pin[0] == 4) {
+                System.out.println("Number of steps is: " + steps);
                 System.out.println("✓Answer Found: " + B[0] + "," + B[1] + "," + B[2] + "," + B[3] + "\n");
                 write_file(path, "✓Answer Found: " + B[0] + "," + B[1] + "," + B[2] + "," + B[3]);
                 System.exit(0);
@@ -401,6 +423,7 @@ public class Mastermind extends file {
                 B[3] = A[j].c4;
                 pin = compare(answer, B);
                 if (pin[0] == 4) {
+                    System.out.println("Number of steps is: " + steps);
                     System.out.println("✓Answer Found: " + B[0] + "," + B[1] + "," + B[2] + "," + B[3] + "\n");
                     write_file(path, "✓Answer Found:" + B[0] + "," + B[1] + "," + B[2] + "," + B[3]);
                     System.exit(0);
