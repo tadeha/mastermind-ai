@@ -48,6 +48,8 @@ public class master extends file {
 		int pin3[] = m.Comparison(answer, guess3);
 		// int guess4[] = m.random();
 		int guess4[] = { 8, 6, 1, 2 };
+		m2.saveguess(guess1, guess2, guess4, pin1, pin2, pin3);
+		m2.child(guess4, answer);
 		System.out.print(guess4[0] + "," + guess4[1] + "," + guess4[2] + "," + guess4[3] + ":  ");
 		write_file(path, guess4[0] + "," + guess4[1] + "," + guess4[2] + "," + guess4[3] + ":  ");
 		int pin4[] = m.Comparison(answer, guess4);
@@ -334,7 +336,7 @@ public class master extends file {
 			m.S(A, answer);
 
 		if (A[0].error == 0) {
-			D(A, answer);
+			m.D(A, answer);
 		}
 
 		return A;
