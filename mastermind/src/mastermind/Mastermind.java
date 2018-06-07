@@ -383,7 +383,7 @@ public class Mastermind extends file {
         }
         // check the error number of array "A" and then if it isn't equal to 0 call the child function with the most less min error node
         if (A[0].error == 0) {
-            D(A, answer);
+            checkTheAnswer(A, answer);
         }
 
         return A;
@@ -392,7 +392,7 @@ public class Mastermind extends file {
 
     // this function checks if the number of black pins are 4 (after comparing it with the answer) prints the result as answer
     // if the nodes with the min error are more than 1 run a for loop for it
-    private static void D(Node[] A, int[] answer) {
+    private static void checkTheAnswer(Node[] A, int[] answer) {
         int B[] = new int[4];
         int pin[];
         int n = 0;
